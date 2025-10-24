@@ -5,7 +5,7 @@
 >
 > This library has not yet been exhaustively tested in production environments and may be missing some features you'd expect in a stable release. As we continue development, there may be breaking changes that require updates to your code.
 >
-> **We'd love your feedback!** Please share any suggestions, bug reports, feature requests, or general thoughts by [filing an issue](https://www.github.com/stainless-sdks/authnator-php/issues/new).
+> **We'd love your feedback!** Please share any suggestions, bug reports, feature requests, or general thoughts by [filing an issue](https://www.github.com/voicecraft-bv/authnator-sdk/issues/new).
 
 The Authnator PHP library provides convenient access to the Authnator REST API from any PHP 8.1.0+ application.
 
@@ -22,7 +22,7 @@ To use this package, install via Composer by adding the following to your applic
   "repositories": [
     {
       "type": "vcs",
-      "url": "git@github.com:stainless-sdks/authnator-php.git"
+      "url": "git@github.com:voicecraft-bv/authnator-sdk.git"
     }
   ],
   "require": {
@@ -176,4 +176,4 @@ PHP 8.1.0 or higher.
 
 ## Contributing
 
-See [the contributing documentation](https://github.com/stainless-sdks/authnator-php/tree/main/CONTRIBUTING.md).
+See [the contributing documentation](https://github.com/voicecraft-bv/authnator-sdk/tree/main/CONTRIBUTING.md).
