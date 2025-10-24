@@ -1,0 +1,4 @@
+configured_endpoints: 5
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/acme-patrykloan%2Fauthnator-15fbee72dcd008cbfc7a7c10ddafd41762905addddbd4210ae13ee73ca0bb144.yml
+openapi_spec_hash: 1e8eddcefda4d972372ef84209b15a64
+config_hash: d170c5f7fba3bee622d5db6d0cdf02e5
