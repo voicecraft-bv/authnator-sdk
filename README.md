@@ -5,7 +5,7 @@
 >
 > This library has not yet been exhaustively tested in production environments and may be missing some features you'd expect in a stable release. As we continue development, there may be breaking changes that require updates to your code.
 >
-> **We'd love your feedback!** Please share any suggestions, bug reports, feature requests, or general thoughts by [filing an issue](https://www.github.com/voicecraft-bv/authnator-sdk/issues/new).
+> **We'd love your feedback!** Please share any suggestions, bug reports, feature requests, or general thoughts by [filing an issue](https://www.github.com/voicecraft-bv/authnator-php/issues/new).
 
 The Authnator PHP library provides convenient access to the Authnator REST API from any PHP 8.1.0+ application.
 
@@ -22,7 +22,7 @@ To use this package, install via Composer by adding the following to your applic
   "repositories": [
     {
       "type": "vcs",
-      "url": "git@github.com:voicecraft-bv/authnator-sdk.git"
+      "url": "git@github.com:voicecraft-bv/authnator-php.git"
     }
   ],
   "require": {
@@ -41,13 +41,11 @@ Parameters with a default value must be set by name.
 
 use Authnator\Client;
 
-$client = new Client(
-  bearerToken: getenv("AUTHNATOR_BEARER_TOKEN") ?: "My Bearer Token"
-);
+$client = new Client(apiKey: getenv("AUTHNATOR_API_KEY") ?: "My API Key");
 
-$me = $client->me->retrieve();
+$response = $client->sessions->resolve("session_token");
 
-var_dump($me->email);
+var_dump($response);
 ```
 
 ### Value Objects
@@ -67,7 +65,7 @@ When the library is unable to connect to the API, or if the API returns a non-su
 use Authnator\Core\Exceptions\APIConnectionException;
 
 try {
-  $me = $client->me->retrieve();
+  $response = $client->sessions->resolve("session_token");
 } catch (APIConnectionException $e) {
   echo "The server could not be reached", PHP_EOL;
   var_dump($e->getPrevious());
@@ -113,8 +111,8 @@ use Authnator\RequestOptions;
 $client = new Client(maxRetries: 0);
 
 // Or, configure per-request:
-$result = $client->me->retrieve(
-  requestOptions: RequestOptions::with(maxRetries: 5)
+$result = $client->sessions->resolve(
+  "session_token", requestOptions: RequestOptions::with(maxRetries: 5)
 );
 ```
 
@@ -133,7 +131,8 @@ Note: the `extra*` parameters of the same name overrides the documented paramete
 
 use Authnator\RequestOptions;
 
-$me = $client->me->retrieve(
+$response = $client->sessions->resolve(
+  "session_token",
   requestOptions: RequestOptions::with(
     extraQueryParams: ["my_query_parameter" => "value"],
     extraBodyParams: ["my_body_parameter" => "value"],
@@ -141,7 +140,7 @@ $me = $client->me->retrieve(
   ),
 );
 
-var_dump($me["my_undocumented_property"]);
+var_dump($response["my_undocumented_property"]);
 ```
 
 #### Undocumented request params
@@ -176,4 +175,4 @@ PHP 8.1.0 or higher.
 
 ## Contributing
 
-See [the contributing documentation](https://github.com/voicecraft-bv/authnator-sdk/tree/main/CONTRIBUTING.md).
+See [the contributing documentation](https://github.com/voicecraft-bv/authnator-php/tree/main/CONTRIBUTING.md).

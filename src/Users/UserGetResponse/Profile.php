@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Authnator\Me;
+namespace Authnator\Users\UserGetResponse;
 
 use Authnator\Core\Attributes\Api;
 use Authnator\Core\Concerns\SdkModel;

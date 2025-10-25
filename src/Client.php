@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Authnator;
 
 use Authnator\Core\BaseClient;
-use Authnator\Services\MeService;
 use Authnator\Services\SessionsService;
 use Authnator\Services\UsersService;
 use Http\Discovery\Psr17FactoryDiscovery;
@@ -13,12 +12,7 @@ use Http\Discovery\Psr18ClientDiscovery;
 
 class Client extends BaseClient
 {
-    public string $bearerToken;
-
-    /**
-     * @api
-     */
-    public MeService $me;
+    public string $apiKey;
 
     /**
      * @api
@@ -30,12 +24,11 @@ class Client extends BaseClient
      */
     public UsersService $users;
 
-    public function __construct(?string $bearerToken = null, ?string $baseUrl = null)
+    public function __construct(?string $apiKey = null, ?string $baseUrl = null)
     {
-        $this->bearerToken = (string) ($bearerToken ?? getenv('AUTHNATOR_BEARER_TOKEN'));
-		
-		$host = $_SERVER['HTTP_X_FORWARDED_HOST'] ?? $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'] ?? 'example.com';
-        $baseUrl ??= getenv('AUTHNATOR_BASE_URL') ?: 'https://' . 'auth.' . $host;
+        $this->apiKey = (string) ($apiKey ?? getenv('AUTHNATOR_API_KEY'));
+
+        $baseUrl ??= getenv('AUTHNATOR_BASE_URL') ?: 'https://api.authnator.com';
 
         $options = RequestOptions::with(
             uriFactory: Psr17FactoryDiscovery::findUriFactory(),
@@ -52,7 +45,6 @@ class Client extends BaseClient
             options: $options,
         );
 
-        $this->me = new MeService($this);
         $this->sessions = new SessionsService($this);
         $this->users = new UsersService($this);
     }
@@ -60,10 +52,6 @@ class Client extends BaseClient
     /** @return array<string, string> */
     protected function authHeaders(): array
     {
-        if (!$this->bearerToken) {
-            return [];
-        }
-
-        return ['Authorization' => "Bearer {$this->bearerToken}"];
+        return ['X-API-Key' => $this->apiKey];
     }
 }

@@ -9,7 +9,7 @@ use Authnator\Core\Concerns\SdkModel;
 use Authnator\Core\Concerns\SdkResponse;
 use Authnator\Core\Contracts\BaseModel;
 use Authnator\Core\Conversion\Contracts\ResponseConverter;
-use Authnator\Me\Profile;
+use Authnator\Users\UserGetResponse\Profile;
 
 /**
  * @phpstan-type user_get_response = array{
