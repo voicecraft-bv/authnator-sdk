@@ -28,7 +28,7 @@
     "sort-packages": true
   },
   "description": "Authnator PHP SDK",
-  "name": "org-placeholder/authnator",
+  "name": "voicecraft/authnator",
   "require": {
     "php": "^8.1",
     "php-http/discovery": "^1",

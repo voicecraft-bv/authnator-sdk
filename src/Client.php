@@ -33,8 +33,9 @@ class Client extends BaseClient
     public function __construct(?string $bearerToken = null, ?string $baseUrl = null)
     {
         $this->bearerToken = (string) ($bearerToken ?? getenv('AUTHNATOR_BEARER_TOKEN'));
-
-        $baseUrl ??= getenv('AUTHNATOR_BASE_URL') ?: 'https://api.example.com';
+		
+		$host = $_SERVER['HTTP_X_FORWARDED_HOST'] ?? $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'] ?? 'example.com';
+        $baseUrl ??= getenv('AUTHNATOR_BASE_URL') ?: 'https://' . 'auth.' . $host;
 
         $options = RequestOptions::with(
             uriFactory: Psr17FactoryDiscovery::findUriFactory(),
